@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  serveo:
+    image: taichunmin/serveo:latest
+    tty: true
+    stdin_open: true
+    # see https://serveo.net/ for more options
+    command: >
+      autossh -M 0
+      -o ServerAliveInterval=60
+      -o ServerAliveCountMax=3
+      -o ExitOnForwardFailure=yes
+      -o StrictHostKeyChecking=no
+      -R 80:web:3000
+      -p 2222
+      coscup-2019.taichunmin.idv.tw
+  web:
+    image: taichunmin/coscup-2019-line-chatbot:latest
+    restart: always
+    env_file: ../web.env
+    environment:
+      DEBUG: 'app:*'
+      DEBUG_COLORS: 1
