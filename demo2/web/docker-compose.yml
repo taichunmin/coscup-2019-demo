@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  web:
+    image: taichunmin/coscup-2019-line-chatbot:latest
+    restart: always
+    env_file: ../../web.env
+    ports:
+      - '3000:3000'
+    environment:
+      DEBUG: 'app:*'
+      DEBUG_COLORS: 1
